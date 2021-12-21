@@ -12,11 +12,15 @@ import {
   SingleProduct,
 } from "./pages";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
+
 
 const App = () => {
   return (
     <Router>
       <Navbar />
+      <Sidebar />
       <Routes>
         <Route path="*" element={<Error />} />
         <Route path="/" element={<Home />} />
@@ -27,6 +31,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/private-route" element={<PrivateRoute />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };
