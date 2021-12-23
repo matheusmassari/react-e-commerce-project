@@ -9,7 +9,7 @@ import { useProductsContext } from "../context/products_context";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar, openSidebar } = useProductsContext();
-  
+
   return (
     <SidebarContainer>
       <aside
@@ -17,7 +17,7 @@ const Sidebar = () => {
       >
         <div className="sidebar-header">
           <img src={logo} alt="comfy sloth" className="logo" />
-          <button className="close-btn" type="button" onClick={() => closeSidebar()}>
+          <button className="close-btn" type="button" onClick={closeSidebar}>
             <FaTimes />
           </button>
         </div>
@@ -26,7 +26,9 @@ const Sidebar = () => {
             const { id, text, url } = link;
             return (
               <li key={id}>
-                <Link to={url}>{text}</Link>
+                <Link to={url} onClick={closeSidebar}>
+                  {text}
+                </Link>
               </li>
             );
           })}
