@@ -5,7 +5,29 @@ import heroBcg from "../assets/hero-bcg.jpeg";
 import heroBcg2 from "../assets/hero-bcg-2.jpeg";
 
 const Hero = () => {
-  return <h4>hero</h4>;
+  return (
+    <Wrapper className="section-center">
+      <article className="content">
+        <h1>
+          faça o design <br />
+          da sua zona de conforto
+        </h1>
+        <p>
+          Mussum Ipsum, cacilds vidis litro abertis. Admodum accumsan
+          disputationi eu sit. Vide electram sadipscing et per. Per aumento de
+          cachacis, eu reclamis. Paisis, filhis, espiritis santis. Cevadis im
+          ampola pa arma uma pindureta.
+        </p>
+        <Link to="/products" className="btn hero-btn">
+          comprar agora
+        </Link>
+      </article>
+      <article className="img-container">
+        <img src={heroBcg} alt="mesa legal" className="main-img" />
+        <img src={heroBcg2} alt="pessoa trabalhando" className="accent-img" />
+      </article>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
