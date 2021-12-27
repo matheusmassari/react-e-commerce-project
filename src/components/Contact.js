@@ -2,8 +2,37 @@ import React from "react";
 import styled from "styled-components";
 
 const Contact = () => {
-  return <h4>contact section</h4>;
+  return (
+    <Wrapper>
+      <div className="section-center">
+        <h3>Assine e ganhe 20% de desconto!</h3>
+        <div className="content">
+          <p>
+            Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz
+            malandris se pirulitá. Interessantiss quisso pudia ce receita de
+            bolis, mais bolis eu num gostis.
+          </p>
+          <form
+            className="contact-form"
+            action="https://formspree.io/f/mdobkkwl"
+            method="POST"
+          >
+            <input
+              type="email"
+              className="form-input"
+              placeholder="digite seu email"
+              name="_replyto"
+            />
+            <button type="submit" className="submit-btn">
+              assinar
+            </button>
+          </form>
+        </div>
+      </div>
+    </Wrapper>
+  );
 };
+
 const Wrapper = styled.section`
   padding: 5rem 0;
   h3 {
