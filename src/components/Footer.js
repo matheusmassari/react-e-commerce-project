@@ -4,9 +4,9 @@ const Footer = () => {
   return <Wrapper>
     <h5>
       &copy; {new Date().getFullYear()}
-      <span> YourBrand</span>
+      <span> SuaMarca</span>
     </h5>
-    <h5>All rights Reserved</h5>
+    <h5>Todos os Direitos Reservados.</h5>
   </Wrapper>
 };
 

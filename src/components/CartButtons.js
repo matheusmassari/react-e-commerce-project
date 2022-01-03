@@ -10,7 +10,7 @@ const CartButtons = () => {
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
-        Cart
+        Cesta
         <span className="cart-container">
           <FaShoppingCart />
           <span>
@@ -19,7 +19,7 @@ const CartButtons = () => {
         </span>
       </Link>
       <button type="button" className="auth-btn">
-          Login <FaUserPlus />
+          Entrar <FaUserPlus />
       </button>
     </Wrapper>
   );
@@ -37,6 +37,7 @@ const Wrapper = styled.div`
     color: var(--clr-grey-1);
     display: flex;
     align-items: center;
+    margin-right: 1.5rem;
   }
   .cart-container {
     display: flex;
