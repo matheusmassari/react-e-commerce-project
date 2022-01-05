@@ -70,8 +70,8 @@ const SingleProdutPage = () => {
             <h5 className="price"> {formatPrice(price)}</h5>
             <p className="desc">{description}</p>
             <p className="info">
-              <span>Disponibilidade: </span>{" "}
-              {stock > 0 ? " Em estoque" : "Indisponível"}
+              <span>Estoque: </span>{" "}
+              {stock > 0 ? " Disponível" : "Indisponível"}
             </p>
             <p className="info">
               <span>SKU: </span>{" "}
@@ -82,7 +82,7 @@ const SingleProdutPage = () => {
               {company}
             </p>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart product={product}/>}
           </section>
         </div>
       </div>
