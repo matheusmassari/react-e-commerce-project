@@ -33,11 +33,16 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
   };
   // Remove item
-  const removeItem = (id) => {};
+  const removeItem = (id) => {
+    dispatch({ type: REMOVE_CART_ITEM, payload:id })
+    state.cart.filter((item) => item.id !== id);
+  };
   // Toggle Amount
   const toggleAmount = (id, value) => {};
   // Clear Cart
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART})
+  };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.cart));
