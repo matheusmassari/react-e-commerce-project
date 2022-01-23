@@ -38,7 +38,9 @@ export const CartProvider = ({ children }) => {
     state.cart.filter((item) => item.id !== id);
   };
   // Toggle Amount
-  const toggleAmount = (id, value) => {};
+  const toggleAmount = (id, value) => {
+    dispatch({ type:TOGGLE_CART_ITEM_AMOUNT, payload:{id, value}})
+  };
   // Clear Cart
   const clearCart = () => {
     dispatch({ type: CLEAR_CART})
