@@ -6,9 +6,11 @@ import CartButtons from "./CartButtons";
 import { links } from "../utils/constants";
 import logo from "../assets/logo.svg";
 import { FaBars } from "react-icons/fa";
+import { useUserContext } from "../context/user_context";
 
 const Navbar = () => {
   const { openSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
 
   return (
     <NavContainer>
@@ -30,6 +32,11 @@ const Navbar = () => {
               </li>
             );
           })}
+          {myUser && (
+            <li>
+              <Link to="/checkout">Checkout</Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </div>

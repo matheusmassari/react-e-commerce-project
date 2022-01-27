@@ -6,16 +6,20 @@ export const UserProvider = ({ children }) => {
   const { isAuthenticated, loginWithRedirect, logout, user, isLoading } =
     useAuth0();
 
-    const [myUser, setMyUser] = useState(null)
+  const [myUser, setMyUser] = useState(null);
 
-    useEffect(() =>{
-      console.log(`user:, ${user}`);
-      console.log(`isAuthenticated:, ${isAuthenticated}`);
-      console.log(`isLoading:, ${isLoading}`);
-    }, [isAuthenticated])
+  useEffect(() => {
+    if (isAuthenticated) {
+      setMyUser(user);
+    } else {
+      setMyUser(false);
+    }
+  }, [isAuthenticated]);
 
   return (
-    <UserContext.Provider value={{loginWithRedirect, logout, myUser}}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ loginWithRedirect, logout, myUser }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 // make sure use
