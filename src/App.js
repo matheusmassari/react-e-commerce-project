@@ -15,7 +15,6 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 
-
 const App = () => {
   return (
     <Router>
@@ -28,7 +27,14 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute path="/checkout">
+              <Checkout />
+            </PrivateRoute>
+          }
+        />
         <Route path="/private-route" element={<PrivateRoute />} />
       </Routes>
       <Footer />
