@@ -27,14 +27,11 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<SingleProduct />} />
-        <Route
-          path="/checkout"
-          element={
-            <PrivateRoute path="/checkout">
-              <Checkout />
-            </PrivateRoute>
-          }
-        />
+        {/* Private Routes Start*/}
+        <Route element={<PrivateRoute />}>
+          <Route path="/checkout" element={<Checkout />} />
+        </Route>
+        {/* Private Routes END*/}
         <Route path="/private-route" element={<PrivateRoute />} />
       </Routes>
       <Footer />
