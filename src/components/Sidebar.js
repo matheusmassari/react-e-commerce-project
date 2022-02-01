@@ -9,7 +9,7 @@ import { useProductsContext } from "../context/products_context";
 import { useUserContext } from "../context/user_context";
 
 const Sidebar = () => {
-  const { isSidebarOpen, closeSidebar, openSidebar } = useProductsContext();
+  const { isSidebarOpen, closeSidebar } = useProductsContext();
   const { myUser } = useUserContext();
 
   return (

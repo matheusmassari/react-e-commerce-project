@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { FeaturedProducts, Hero, Services, Contact } from "../components";
 
 const HomePage = () => {
