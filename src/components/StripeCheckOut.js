@@ -48,11 +48,11 @@ const CheckoutForm = () => {
 
   const createPaymentIntent = async () => {
     try {
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         "/.netlify/functions/create-payment-intent",
         JSON.stringify({ total_amount, shipping_fee })
       );
-      setClientSecret(data.clientSecret)
+      setClientSecret(data.clientSecret);
     } catch (error) {
       console.log(error.response);
     }
@@ -63,42 +63,80 @@ const CheckoutForm = () => {
     //eslint-disable-next-line
   }, []);
 
-  const handleChange = async (event) => {};
-  const handleSubmit = async (ev) => {};
+  const handleChange = async (event) => {
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : "");
+  };
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    setProcessing(true);
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+    if (payload.error) {
+      setError(`Falha no pagamento ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
+      setTimeout(() => {
+        clearCart();
+        navigate("/")
+      },10000)
+    }
+  };
 
   return (
-    <div>
-      <form id="payment-form" onSubmit={handleSubmit}>
-        <CardElement
-          id="card-element"
-          options={cardStyle}
-          onChange={handleChange}
-        />
-        <button disabled={processing || disabled || succeeded} id="submit">
-          <span id="button-text">
-            {processing ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              "Pagar"
-            )}
-          </span>
-        </button>
-        {/* { Mostra qualquer erro que aconteça durante o processamento do pagamento } */}
-        {error && (
-          <div className="card-error" role="alert">
-            {error}
-          </div>
-        )}
-        {/* Mostra mensagem de sucesso apos finalizacao */}
-        <p className={succeeded ? "result-message" : "result-message hidden"}>
-          Pagamento efetuado com sucesso, verifique seu{" "}
-          <a href={`https://dashboard.stripe.com/test/payments`}>
-            painel Stripe.
-          </a>{" "}
-          Recarregue a página para pagar novamente.
-        </p>
-      </form>
-    </div>
+    <>
+      {succeeded ? (
+        <article>
+          <h4>Obrigado!</h4>
+          <h4>O seu pagamento foi efetuado com sucesso!</h4>
+          <h4>Redirecionando</h4>
+        </article>
+      ) : (
+        <article>
+          <h4>Olá, {myUser && myUser.name}</h4>
+          <p>Seu total é {formatPrice(shipping_fee + total_amount)}</p>
+          <p>Cartão de teste : 4242 4242 4242 4242</p>
+        </article>
+      )}
+      <div>
+        <form id="payment-form" onSubmit={handleSubmit}>
+          <CardElement
+            id="card-element"
+            options={cardStyle}
+            onChange={handleChange}
+          />
+          <button disabled={processing || disabled || succeeded} id="submit">
+            <span id="button-text">
+              {processing ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Pagar"
+              )}
+            </span>
+          </button>
+          {/* { Mostra qualquer erro que aconteça durante o processamento do pagamento } */}
+          {error && (
+            <div className="card-error" role="alert">
+              {error}
+            </div>
+          )}
+          {/* Mostra mensagem de sucesso apos finalizacao */}
+          <p className={succeeded ? "result-message" : "result-message hidden"}>
+            Pagamento efetuado com sucesso, verifique seu{" "}
+            <a href={`https://dashboard.stripe.com/test/payments`}>
+              painel Stripe.
+            </a>{" "}
+            Recarregue a página para pagar novamente.
+          </p>
+        </form>
+      </div>
+    </>
   );
 };
 
